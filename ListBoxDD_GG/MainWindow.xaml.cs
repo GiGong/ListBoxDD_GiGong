@@ -20,9 +20,20 @@ namespace ListBoxDD_GG
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ListBox listBox
+        {
+            get { return listBoxDD.ListBoxDD; }
+            set { listBoxDD.ListBoxDD = value; }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            for (int i = 1; i <= 30; i++)
+            {
+                listBox.Items.Add(i.ToString());
+            }
         }
     }
 }
