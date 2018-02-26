@@ -6,12 +6,28 @@ using System.Windows.Media;
 
 namespace GiGong
 {
+    public class GGData
+    {
+        // int -> "Type" you want
+        public int Item { get; set; }
+
+        public GGData(int item)
+        {
+            this.Item = item;
+        }
+
+        public override string ToString()
+        {
+            return Item.ToString();
+        }
+    }
+
     /// <summary>
     /// DragDropListBox.xaml에 대한 상호 작용 논리
     /// </summary>
     public partial class ListBoxDragDrop : UserControl
     {
-        List<string> listDrag;
+        List<GGData> listDrag;
 
         bool isDrag = false;
         bool isOut = true;
@@ -79,9 +95,9 @@ namespace GiGong
                 if (listBoxItem == null)
                     return;
 
-                listDrag = new List<string>(box.SelectedItems.Count);
+                listDrag = new List<GGData>(box.SelectedItems.Count);
 
-                foreach (string item in box.Items)
+                foreach (GGData item in box.Items)
                 {
                     if (box.SelectedItems.Contains(item))
                         listDrag.Add(item);
@@ -117,7 +133,7 @@ namespace GiGong
                 int index = -1;
                 var target = FindAncestor<ListBoxItem>((DependencyObject)(box.InputHitTest(e.GetPosition(box))));
 
-                if (target != null && listDrag.Contains(target.Content as string))
+                if (target != null && listDrag.Contains(target.Content as GGData))
                 {
                     index = box.Items.IndexOf(target.Content);
                     target = null;
@@ -155,7 +171,7 @@ namespace GiGong
         {
             var item = sender as ListBoxItem;
 
-            if (listDrag.Contains(item.Content as string))
+            if (listDrag.Contains(item.Content as GGData))
                 return;
 
             item.Background = Brushes.PowderBlue;
@@ -167,7 +183,7 @@ namespace GiGong
         {
             var item = sender as ListBoxItem;
 
-            if (listDrag.Contains(item.Content as string))
+            if (listDrag.Contains(item.Content as GGData))
                 return;
 
             item.Background = Brushes.Transparent;

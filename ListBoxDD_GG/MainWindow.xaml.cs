@@ -32,7 +32,7 @@ namespace ListBoxDD_GG
 
             for (int i = 1; i <= 30; i++)
             {
-                listBox.Items.Add(i.ToString());
+                listBox.Items.Add(new GiGong.GGData(i));
             }
         }
     }
